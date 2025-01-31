@@ -26,4 +26,4 @@ jobs:
 
       - name: Push Docker Image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/your-image-name:$IMAGE_TAG
+          docker push ${{ secrets.DOCKER_USERNAME }}/fastapi-sample-project:$IMAGE_TAG
