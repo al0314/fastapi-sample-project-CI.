@@ -10,7 +10,8 @@ services:
     depends_on:
       - redis
       - mongodb
-
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    
   celery:
     build:
       context: .
@@ -18,6 +19,7 @@ services:
     depends_on:
       - redis
       - mongodb
+    command: ["celery", "-A", "tasks.celery_app", "worker", "--loglevel=info"]
 
   redis:
     image: redis:7-alpine
