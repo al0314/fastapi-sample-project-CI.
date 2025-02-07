@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - feature/docker-configuration
-  pull_request:
-    branches:
-      - feature/docker-configuration
 
 jobs:
   build-docker:
