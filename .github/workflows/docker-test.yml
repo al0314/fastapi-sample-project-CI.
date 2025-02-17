@@ -5,6 +5,7 @@ on:
     branches:
       - feature/docker-configuration
   pull_request:
+    types: ["opened","reopened"]
     branches:
       - feature/docker-configuration
 
