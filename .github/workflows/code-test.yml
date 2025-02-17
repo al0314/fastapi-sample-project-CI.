@@ -48,13 +48,24 @@ jobs:
       - name: Run Tests
         run: |
           pytest app/tests/
+
+  CodeQL_Advanced:
+    name: CodeQL Advanced
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up CodeQL
+        uses: github/codeql-action/setup-codeql@v2
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
   
   
 
   
   depchecktest:
     runs-on: ubuntu-latest
-    needs: CodeQL Advanced
+    needs: CodeQL_Advanced
     name: depecheck_test
     steps:
       - name: Checkout
