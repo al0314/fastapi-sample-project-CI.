@@ -48,17 +48,3 @@ jobs:
           head: ${{ github.head_ref }}
           title: "Merge feature branch into development"
           body: "Automated pull request for merging changes."
-    
-    
-  
-  
-  
-
-  
-  
-  
-    
-  
-    
-    
-  
