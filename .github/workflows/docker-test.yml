@@ -40,9 +40,9 @@ jobs:
     needs: build-docker
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4 
       - name: Create Pull Request
-        uses: al0314/create-pull-request@v3
+        uses: al0314/create-pull-request@v7     
         with:
           base: development
           head: ${{ github.head_ref }}
