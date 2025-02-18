@@ -42,7 +42,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install --no-cache-dir -r app/requirements-dev.txt
+          pip install --no-cache-dir -r requirements-dev.txt
           pip install pytest
 
       - name: Run Tests
