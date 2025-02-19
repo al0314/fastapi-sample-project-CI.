@@ -42,7 +42,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4 
       - name: Create Pull Request
-        uses: al0314/create-pull-request@v7     
+        uses: al0314/create-pull-request@v7    
         with:
           base: development
           head: ${{ github.head_ref }}
