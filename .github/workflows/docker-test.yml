@@ -35,7 +35,7 @@ jobs:
           exit-code: 1
           severity: 'CRITICAL,HIGH'
   
-  create-pull-request:
+  pull-request:
     runs-on: ubuntu-latest
     needs: build-docker
     steps:
@@ -45,6 +45,6 @@ jobs:
         uses: peter-evans/create-pull-request@v7    
         with:
           base: development
-          branch: ${{ github.head_ref }}
+          branch: ${{ github.ref_name }}
           title: "Merge feature branch into development"
           body: "Automated pull request for merging changes."
