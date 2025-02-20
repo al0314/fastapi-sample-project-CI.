@@ -44,8 +44,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GIT_PAT }}
         run: |
-          if gh pr list --base development --head feature/new --state
-            echo "PR already exists, skipping creation."
+          if gh pr list --base development --head feature/new --state open | grep -q "feature/new"; then
+            echo "PR already exists, skipping creation." 
           else
             gh pr create \
               --base development \
