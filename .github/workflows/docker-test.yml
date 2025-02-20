@@ -51,7 +51,7 @@ jobs:
               --base development \
               --head feature/new \
               --title "Auto PR: Merge feature/new into development" \
-              --body "This pull request was automatically created by GitHub A
+              --body "This pull request was automatically created by GitHub Action."
             echo "PR created successfully."
           fi
           
