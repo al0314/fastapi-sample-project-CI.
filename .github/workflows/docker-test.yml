@@ -34,4 +34,24 @@ jobs:
           format: 'table'
           exit-code: 1
           severity: 'CRITICAL,HIGH'
-        
+  create-pull-request:
+    needs: build-docker 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Create Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GIT_PAT }}
+        run: |
+          if gh pr list --base development --head feature/new --state
+            echo "PR already exists, skipping creation."
+          else
+            gh pr create \
+              --base development \
+              --head feature/new \
+              --title "Auto PR: Merge feature/new into development" \
+              --body "This pull request was automatically created by GitHub A
+            echo "PR created successfully."
+          fi
+          
