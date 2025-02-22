@@ -9,6 +9,12 @@ on:
   
   
 
+
+permissions:
+  contents: read
+  pull-requests: write
+
+
 jobs:
   build-docker:
     runs-on: ubuntu-latest
@@ -23,6 +29,15 @@ jobs:
           dockerfile: ./Dockerfile
         continue-on-error: true
 
+      - name: Scan Dockerfile for Vulnerabilities
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: 'base-dockerfile'
+          format: 'table'
+          exit-code: 1
+          severity: 'CRITICAL,HIGH'
+
       - name: Dry run docker build process
         run: |
           docker build --progress=plain --no-cache -t test-image .
@@ -34,8 +49,10 @@ jobs:
           format: 'table'
           exit-code: 1
           severity: 'CRITICAL,HIGH'
+
+
   create-pull-request:
-    needs: build-docker 
+    needs: build-docker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -44,14 +61,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GIT_PAT }}
         run: |
-          if gh pr list --base development --head feature/new --state open | grep -q "feature/new"; then
-            echo "PR already exists, skipping creation." 
+          if gh pr list --base development --head feature/docker-configuration --state open | grep -q "feature/docker-configuration"; then
+            echo "PR already exists, skipping creation."
           else
             gh pr create \
               --base development \
-              --head feature/new \
-              --title "Auto PR: Merge feature/new into development" \
-              --body "This pull request was automatically created by GitHub Action."
+              --head feature/docker-configuration \
+              --title "Auto PR: Merge feature/docker-configuration into development" \
+              --body "This pull request was automatically created by GitHub Actions."
             echo "PR created successfully."
           fi
-          
+
