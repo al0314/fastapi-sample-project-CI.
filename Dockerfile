@@ -6,7 +6,7 @@ RUN pip install --no-cache-dir --upgrade setuptools==75.8.0
 
 WORKDIR /app
 
-COPY app/requirements.txt .
+COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 

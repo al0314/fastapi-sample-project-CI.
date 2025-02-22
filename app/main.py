@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from app.tasks import create_task
 from pymongo import MongoClient
+from app.tasks import create_task
+
 
 client = MongoClient("mongodb://mongodb:27017/")
 db = client["celery_db"]
@@ -21,4 +22,3 @@ def run_task(data: str):
 def get_all_tasks():
     tasks = list(collection.find({}, {"_id": 0}))
     return {"tasks": tasks}
-

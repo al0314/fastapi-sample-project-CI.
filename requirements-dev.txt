@@ -1,0 +1,8 @@
+pylint==3.3.4
+pytest
+flake8
+fastapi
+pymongo
+celery
+httpx 
+

@@ -3,14 +3,17 @@ name: Docker Build Check
 on:
   push:
     branches:
-      - feature/docker-configuration
-  pull_request:
-    branches:
-      - development
+      - 'feature/*'
+  
+  
+  
+  
+
 
 permissions:
   contents: read
   pull-requests: write
+
 
 jobs:
   build-docker:
@@ -37,7 +40,7 @@ jobs:
 
       - name: Dry run docker build process
         run: |
-          docker build --progress=plain --no-cache -t test-image -f base-dockerfile .
+          docker build --progress=plain --no-cache -t test-image .
           
       - name: Security Scan with Trivy
         uses: aquasecurity/trivy-action@master
@@ -47,13 +50,13 @@ jobs:
           exit-code: 1
           severity: 'CRITICAL,HIGH'
 
+
   create-pull-request:
     needs: build-docker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Create Pull Request
         env:
           GH_TOKEN: ${{ secrets.GIT_PAT }}
@@ -68,3 +71,4 @@ jobs:
               --body "This pull request was automatically created by GitHub Actions."
             echo "PR created successfully."
           fi
+
